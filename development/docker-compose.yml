@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+  app:
+    container_name: bacen-pix-mock
+    build:
+      context: ../
+      dockerfile: ./development/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ../:/home/app
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
