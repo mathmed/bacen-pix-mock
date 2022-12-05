@@ -157,16 +157,6 @@ def test_clean_special_chars_should_return_correct_value():
     assert clean_special_chars(True) == True
 
 
-@pytest.mark.parametrize('value, result', [('camelCase', 'camel_case'), ('camel', 'camel')])
-def test_convert_camel_case_to_snake_case(value, result):
-    assert convert_camel_case_to_snake_case(value) == result
-
-
-@pytest.mark.parametrize('value, result', [('camel_case', 'camelCase'), ('camel', 'camel')])
-def test_convert_snake_case_to_camel_case(value, result):
-    assert convert_snake_case_to_camel_case(value) == result
-
-
 @pytest.mark.parametrize('value, result', [
     ('São Paulo', 'Sao Paulo'),
     ('São José dos Campos', 'S J Campos'),

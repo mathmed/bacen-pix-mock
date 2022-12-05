@@ -1,1 +1,2 @@
-from .http import HttpError, HttpRequest, HttpResponse, HttpStatus
+from .http import (HandledError, HttpError, HttpRequest, HttpResponse,
+                   HttpStatus)

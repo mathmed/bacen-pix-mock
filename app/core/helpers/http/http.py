@@ -1,6 +1,12 @@
 from http import HTTPStatus
 from typing import Any, Dict, Optional
 
+from pydantic import BaseModel
+
+
+class HandledError(BaseModel):
+    message: str
+
 
 class HttpRequest:
     def __init__(self, header: Optional[Dict] = None, body: Optional[Dict] = None, query: Optional[Dict] = None):

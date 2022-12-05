@@ -3,22 +3,6 @@ from typing import Dict
 from unicodedata import normalize
 
 
-def convert_snake_case_dict_items_to_camel_case(dict: Dict) -> Dict:
-    new_dict = {}
-    for key, value in dict.items():
-        new_dict[convert_snake_case_to_camel_case(key)] = value
-    return new_dict
-
-
-def convert_camel_case_to_snake_case(text: str) -> str:
-    return sub(r'(?<!^)(?=[A-Z])', '_', text).lower()
-
-
-def convert_snake_case_to_camel_case(snake_str: str) -> str:
-    components = snake_str.split('_')
-    return components[0] + ''.join(x.title() for x in components[1:])
-
-
 def clean_str_accent(value: str) -> str:
     try:
         text = unicode(value, 'utf-8')
@@ -41,16 +25,6 @@ def normalize_document(document: str) -> str:
 
 def is_valid_phone(phone: str) -> bool:
     is_valid = match(r'^\+[1-9][0-9]\d{1,14}$', phone)
-    return bool(is_valid)
-
-
-def is_valid_cpf(cpf: str) -> bool:
-    is_valid = match(r'^[0-9]{11}$', cpf)
-    return bool(is_valid)
-
-
-def is_valid_cnpj(cnpj: str) -> bool:
-    is_valid = match(r'^[0-9]{14}$', cnpj)
     return bool(is_valid)
 
 
@@ -169,6 +143,9 @@ def abbreviate_city_name(name, str_len=15) -> str:
 
 def validate_cpf(cpf: str) -> bool:
 
+    if not match(r'^[0-9]{11}$', cpf):
+        return False
+
     #  Obtém os números do CPF e ignora outros caracteres
     cpf = [int(char) for char in cpf if char.isdigit()]
 
@@ -190,6 +167,9 @@ def validate_cpf(cpf: str) -> bool:
 
 
 def validate_cnpj(cnpj: str) -> bool:
+
+    if not match(r'^[0-9]{14}$', cnpj):
+        return False
 
     cnpj = "".join(char for char in cnpj if char.isdigit())
     first_validator_list = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
@@ -253,8 +233,23 @@ def to_camel_case(snake_str: str) -> str:
     return components[0] + ''.join(x.title() for x in components[1:])
 
 
-def format_payload_response(object: object) -> Dict:
+def to_snake_case(text: str) -> str:
+    return sub(r'(?<!^)(?=[A-Z])', '_', text).lower()
+
+
+def to_dict_camel_case(dict: Dict) -> Dict:
     item = {}
-    for key, value in object.__dict__.items():
+    for key, value in dict.items():
         item[to_camel_case(key)] = value
     return item
+
+
+def to_dict_snake_case(dict: Dict) -> Dict:
+    item = {}
+    for key, value in dict.items():
+        item[to_snake_case(key)] = value
+    return item
+
+
+def contains_number(string: str):
+    return any(char.isdigit() for char in string)
