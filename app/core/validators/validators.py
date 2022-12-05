@@ -1,4 +1,5 @@
 from re import match
+
 from app.core.helpers.strings import (contains_number, validate_cnpj,
                                       validate_cpf)
 
@@ -54,11 +55,11 @@ def validate_branch(branch: str):
     branch: str = str(branch)
     assert branch.isdigit(), f'Value of `branch` must be a digit.'
     assert 0 < len(
-        branch) < 4, f'Value of `branch` must contain between 1 and 4 digits'
+        branch) <= 4, f'Value of `branch` must contain between 1 and 4 digits'
 
 
 def validate_account_number(account: str):
     account: str = str(account)
     assert account.isdigit(), f'Value of `account_number` must be a digit.'
     assert 0 < len(
-        account) < 16, f'Value of `branch` must contain between 1 and 16 digits'
+        account) <= 16, f'Value of `branch` must contain between 1 and 16 digits'
