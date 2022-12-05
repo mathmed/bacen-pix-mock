@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import Request, Response
 
-from app.adapters.fastapi_adapter import fastapi_adapter
+from app.adapters.http import fastapi_adapter
 from app.main import app
 from app.ports.usecases.create_key_port import CreateKeyParams
 from app.ports.usecases.get_key_port import GetKeyParams
