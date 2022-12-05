@@ -7,7 +7,7 @@ from app.core.helpers.http import HandledError
 from app.main import app
 from app.ports.usecases.create_key_port import (CreateKeyParams,
                                                 CreateKeyResponse)
-from app.ports.usecases.get_key_port import GetKeyParams
+from app.ports.usecases.get_key_port import GetKeyParams, GetKeyResponse
 from app.presentation.factories import create_key_factory, get_key_factory
 
 TAGS = ['Chaves']
@@ -39,11 +39,18 @@ def create_key(response: Response, body: CreateKeyParams):
 
 
 @app.get(
-    PREFIX,
+    PREFIX + '/{key}',
     status_code=HTTPStatus.OK,
     summary='Buscar chave PIX',
-    responses={},
+    responses={
+        HTTPStatus.OK.value: {
+            'model': GetKeyResponse
+        },
+        HTTPStatus.NOT_FOUND.value: {
+            'model': HandledError
+        },
+    },
     tags=TAGS
 )
-def get_key(request: Request, response: Response):
-    return fastapi_adapter(response, get_key_factory(GetKeyParams()))
+def get_key(key: str, response: Response):
+    return fastapi_adapter(response, get_key_factory(GetKeyParams(key=key)))

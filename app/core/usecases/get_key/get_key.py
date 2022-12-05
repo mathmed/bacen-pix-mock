@@ -1,12 +1,25 @@
-from app.core.helpers.http import HttpResponse, HttpStatus
+from http import HTTPStatus
+
+from app.core.collections import Key
+from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
+from app.ports.external import DatabasePort
 from app.ports.usecases import GetKeyParams, GetKeyPort
 
 
 class GetKey(GetKeyPort):
 
-    def __init__(self, params: GetKeyParams) -> None:
+    def __init__(self, params: GetKeyParams, database: DatabasePort) -> None:
         self.params = params
+        self.database = database
 
     def execute(self) -> HttpResponse:
-        print('GetKey')
-        return HttpStatus.no_content_204()
+        key = self._get_key()
+        return HttpStatus.ok_200(key.to_dict())
+
+    def _get_key(self) -> Key:
+        key = self.database.get_by_filters(
+            'Key', [{'keyValue': self.params.key}])
+        if len(key) == 0:
+            raise HttpError(HTTPStatus.NOT_FOUND,
+                            f'Key {self.params.key} not found')
+        return key[0]
