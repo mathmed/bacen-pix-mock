@@ -6,15 +6,18 @@ from app.core.helpers.http import HttpResponse
 from .usecase import NOT_IMPLEMENTED_ERROR, InputData, Usecase
 
 
-class CreateISPBParams(InputData):
-    pass
+class CreateInstitutionParams(InputData):
+    name: str
+    ispb: str
+    document: str
+    callback_url: str
 
 
-class CreateISPBResponse(InputData):
-    pass
+class CreateInstitutionResponse(InputData):
+    id: str
 
 
-class CreateISPBPort(Usecase):
+class CreateInstitutionPort(Usecase):
     @abstractmethod
     def execute(self) -> HttpResponse:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR)
