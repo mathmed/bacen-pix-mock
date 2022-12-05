@@ -1,5 +1,4 @@
 from unittest import TestCase
-from uuid import uuid4
 
 import pytest
 from faker import Faker
@@ -25,16 +24,6 @@ def test_should_return_correct_normalized_cpf():
 def test_should_return_correct_normalized_cnpj():
     result = normalize_document('12.345.678/9101-12')
     assert result == '12345678910112'
-
-
-def test_should_return_true_on_valid_phone():
-    result = is_valid_phone(f'+{faker.msisdn()}')
-    assert result is True
-
-
-def test_should_return_false_on_invalid_phone():
-    result = is_valid_phone(faker.word())
-    assert result is False
 
 
 def test_should_return_true_on_valid_digit_cpf():
@@ -65,26 +54,6 @@ def test_should_return_false_on_invalid_verification_cpf_code():
 def test_should_return_false_on_valid_digit_cnpj():
     result = validate_cnpj(normalize_document(faker.word()))
     assert result is False
-
-
-def test_should_return_false_on_invalid_uuid():
-    result = is_valid_uuid(faker.word())
-    assert result is False
-
-
-def test_should_return_true_on_valid_uuid():
-    result = is_valid_uuid(str(uuid4()))
-    assert result is True
-
-
-def test_should_return_false_on_invalid_email():
-    result = is_valid_email(faker.word())
-    assert result is False
-
-
-def test_should_return_true_on_valid_email():
-    result = is_valid_email(faker.email())
-    assert result is True
 
 
 @pytest.mark.parametrize('value, result', [

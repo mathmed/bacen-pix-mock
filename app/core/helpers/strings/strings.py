@@ -23,23 +23,6 @@ def normalize_document(document: str) -> str:
     return document.replace('.', '').replace('-', '').replace(' ', '').replace('/', '')
 
 
-def is_valid_phone(phone: str) -> bool:
-    is_valid = match(r'^\+[1-9][0-9]\d{1,14}$', phone)
-    return bool(is_valid)
-
-
-def is_valid_uuid(uuid: str) -> bool:
-    is_valid = match(
-        r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', uuid)
-    return bool(is_valid)
-
-
-def is_valid_email(email: str) -> bool:
-    is_valid = match(
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", email)
-    return bool(is_valid)
-
-
 def is_valid_hour(hour: str) -> bool:
     is_valid = match(r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', hour)
     return bool(is_valid)
