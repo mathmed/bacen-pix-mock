@@ -37,16 +37,6 @@ def test_should_return_false_on_invalid_phone():
     assert result is False
 
 
-def test_should_return_false_on_invalid_cpf():
-    result = is_valid_cpf(faker.word())
-    assert result is False
-
-
-def test_should_return_true_on_valid_cpf():
-    result = is_valid_cpf(normalize_document(faker.cpf()))
-    assert result is True
-
-
 def test_should_return_true_on_valid_digit_cpf():
     result = validate_cpf(normalize_document(faker.cpf()))
     assert result is True
@@ -75,16 +65,6 @@ def test_should_return_false_on_invalid_verification_cpf_code():
 def test_should_return_false_on_valid_digit_cnpj():
     result = validate_cnpj(normalize_document(faker.word()))
     assert result is False
-
-
-def test_should_return_false_on_invalid_cnpj():
-    result = is_valid_cnpj(faker.word())
-    assert result is False
-
-
-def test_should_return_true_on_valid_cnpj():
-    result = is_valid_cnpj(normalize_document(faker.cnpj()))
-    assert result is True
 
 
 def test_should_return_false_on_invalid_uuid():
@@ -185,4 +165,4 @@ def test_abbreviate_name_greater_than_fifteen(value, result):
      {'anyAny': 'value', 'anyAny2': 'value'})
 ])
 def test_convert_snake_case_dict_items_to_camel_case_should_return_correct_dict(value, result):
-    TestCase().assertDictEqual(convert_snake_case_dict_items_to_camel_case(value), result)
+    TestCase().assertDictEqual(to_dict_camel_case(value), result)
