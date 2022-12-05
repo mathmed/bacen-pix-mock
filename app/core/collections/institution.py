@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from app.core.helpers.strings import contains_number, validate_cnpj
+from app.core.validators import validate_document, validate_ispb, validate_name
 
 from .base_collection import BaseCollection
 
@@ -17,20 +17,14 @@ class Institution(BaseCollection):
     def __setattr__(self, attribute: str, value: Any):
 
         if attribute == 'name':
-            assert 0 < len(
-                value) < 50, f'Value of {attribute} must contain between 1 - 50 characters.'
-            assert not contains_number(
-                value), f'Value of {attribute} must not contain digits.'
+            validate_name(value)
 
         if attribute == 'ispb':
-            value: str = str(value)
-            assert value.isdigit(), f'Value of {attribute} must be a digit.'
-            assert len(
-                value) == 8, f'Value of {attribute} must contain 8 characters.'
+            value = str(value)
+            validate_ispb(value)
 
         if attribute == 'document':
-            value: str = str(value)
-            assert validate_cnpj(
-                value) is True, f'Value of {attribute} must be a valid CNPJ.'
+            value = str(value)
+            validate_document(value, 'any')
 
         self.__dict__[attribute] = value
