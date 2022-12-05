@@ -21,3 +21,6 @@ class DatabaseMock(DatabasePort):
         collection: BaseCollection,
     ) -> str:
         return faker.word()
+
+    def delete(self, id: str, collection: str):
+        pass

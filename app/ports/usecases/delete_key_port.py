@@ -6,11 +6,11 @@ from app.core.helpers.http import HttpResponse
 from .usecase import NOT_IMPLEMENTED_ERROR, InputData, Usecase
 
 
-class GetKeyParams(InputData):
+class DeletetKeyParams(InputData):
     key: str
 
 
-class GetKeyPort(Usecase):
+class DeleteKeyPort(Usecase):
     @abstractmethod
     def execute(self) -> HttpResponse:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR)

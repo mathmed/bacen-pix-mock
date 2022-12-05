@@ -19,6 +19,7 @@ class Key(BaseCollection, InputData):
     branch: str
     account_number: str
     account_type: AccountTypes
+    _id: str = None
 
     def __setattr__(self, attribute: str, value: Any):
 

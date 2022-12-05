@@ -15,3 +15,11 @@ class SaveError(Exception):
     def __init__(self, collection: str, id: Optional[str] = ''):
         self.message = f'Entity {collection} could not be saved on DB. ID: {id}'
         super().__init__(self.message)
+
+
+class DeleteError(Exception):
+    """Exception raised for errors on delete some Entity on Database"""
+
+    def __init__(self, collection: str, id: Optional[str] = ''):
+        self.message = f'Entity {collection} could not be deleted on DB. ID: {id}'
+        super().__init__(self.message)

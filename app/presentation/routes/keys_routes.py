@@ -1,14 +1,17 @@
 from http import HTTPStatus
 
-from fastapi import Request, Response
+from fastapi import Response
 
 from app.adapters.http import fastapi_adapter
+from app.core.collections import Key
 from app.core.helpers.http import HandledError
 from app.main import app
 from app.ports.usecases.create_key_port import (CreateKeyParams,
                                                 CreateKeyResponse)
-from app.ports.usecases.get_key_port import GetKeyParams, GetKeyResponse
-from app.presentation.factories import create_key_factory, get_key_factory
+from app.ports.usecases.delete_key_port import DeleteKeyPort, DeletetKeyParams
+from app.ports.usecases.get_key_port import GetKeyParams
+from app.presentation.factories import (create_key_factory, delete_key_factory,
+                                        get_key_factory)
 
 TAGS = ['Chaves']
 PREFIX = '/keys'
@@ -44,7 +47,7 @@ def create_key(response: Response, body: CreateKeyParams):
     summary='Buscar chave PIX',
     responses={
         HTTPStatus.OK.value: {
-            'model': GetKeyResponse
+            'model': Key
         },
         HTTPStatus.NOT_FOUND.value: {
             'model': HandledError
@@ -54,3 +57,21 @@ def create_key(response: Response, body: CreateKeyParams):
 )
 def get_key(key: str, response: Response):
     return fastapi_adapter(response, get_key_factory(GetKeyParams(key=key)))
+
+
+@app.delete(
+    PREFIX + '/{key}',
+    status_code=HTTPStatus.NO_CONTENT,
+    summary='Deletar chave PIX',
+    responses={
+        HTTPStatus.BAD_REQUEST.value: {
+            'model': HandledError
+        },
+        HTTPStatus.NOT_FOUND.value: {
+            'model': HandledError
+        },
+    },
+    tags=TAGS
+)
+def delete_key(key: str, response: Response):
+    return fastapi_adapter(response, delete_key_factory(DeletetKeyParams(key=key)))

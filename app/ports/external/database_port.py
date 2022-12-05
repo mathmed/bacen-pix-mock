@@ -22,3 +22,11 @@ class DatabasePort(ABC):
         collection: BaseCollection,
     ) -> str:
         raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def delete(
+        self,
+        id: str,
+        collection: str,
+    ):
+        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)

@@ -10,7 +10,8 @@ from pymongo.collection import Collection
 from pymongo.database import Database
 
 from app.core.collections import BaseCollection
-from app.core.errors.database_errors import EntityNotFound, SaveError
+from app.core.errors.database_errors import (DeleteError, EntityNotFound,
+                                             SaveError)
 from app.ports.external.database_port import DatabasePort
 
 
@@ -68,3 +69,15 @@ class MongoDBAdapter(DatabasePort):
         except Exception:
             print(format_exc())
             raise SaveError(collection_name, id)
+
+    def delete(
+        self,
+        id: str,
+        collection: str,
+    ):
+        try:
+            collection_instance: Collection = self._get_db()[collection]
+            collection_instance.delete_one({'_id': id})
+        except Exception:
+            print(format_exc())
+            raise DeleteError(collection, id)
