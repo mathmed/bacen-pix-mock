@@ -7,7 +7,7 @@ from fastapi import Response
 from app.adapters.http import fastapi_adapter
 from app.core.helpers.http import HandledError
 from app.main import app
-from app.ports.usecases.create_institution import (CreateInstitutionParams,
+from app.ports.usecases.create_institution_port import (CreateInstitutionParams,
                                                    CreateInstitutionResponse)
 from app.presentation.factories import create_institution_factory
 

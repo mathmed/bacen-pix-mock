@@ -3,6 +3,8 @@ from fastapi import FastAPI
 
 load_dotenv()
 
-app = FastAPI()
+app = FastAPI(
+    title='Pix Mock - BACEN'
+)
 
 from app.presentation.routes import *

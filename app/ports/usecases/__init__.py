@@ -1,5 +1,5 @@
 from .confirm_pix import ConfirmPixParams, ConfirmPixPort, ConfirmPixResponse
-from .create_institution import (CreateInstitutionParams,
+from .create_institution_port import (CreateInstitutionParams,
                                  CreateInstitutionPort,
                                  CreateInstitutionResponse)
 from .create_key_port import CreateKeyParams, CreateKeyPort, CreateKeyResponse
