@@ -24,6 +24,10 @@ def cnpj() -> str:
     return faker.cnpj().replace('-', '').replace('.', '').replace('/', '')
 
 
+def cpf() -> str:
+    return faker.cpf().replace('-', '').replace('.', '')
+
+
 def person() -> str:
     return faker.name()
 
