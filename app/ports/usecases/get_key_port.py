@@ -1,16 +1,17 @@
 
 from abc import abstractmethod
 
+from app.core.collections import Key
 from app.core.helpers.http import HttpResponse
 
 from .usecase import NOT_IMPLEMENTED_ERROR, InputData, Usecase
 
 
 class GetKeyParams(InputData):
-    pass
+    key: str
 
 
-class GetKeyResponse(InputData):
+class GetKeyResponse(Key):
     pass
 
 

@@ -4,12 +4,13 @@ from typing import Any
 
 from app.core.enums.enums import AccountTypes, KeyTypes
 from app.core.validators import *
+from app.ports.usecases.usecase import InputData
 
 from .base_collection import BaseCollection
 
 
 @dataclass
-class Key(BaseCollection):
+class Key(BaseCollection, InputData):
     key_type: KeyTypes
     key_value: str
     owner_document: str
