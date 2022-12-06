@@ -1,1 +1,1 @@
-from .passlib import Passlib
+from .passlib_adapter import PasslibAdapter

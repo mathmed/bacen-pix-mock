@@ -3,7 +3,7 @@ from passlib.hash import pbkdf2_sha256
 from app.ports.external import EncryptPort
 
 
-class Passlib(EncryptPort):
+class PasslibAdapter(EncryptPort):
 
     def encrypt(self, password: str) -> str:
         return pbkdf2_sha256.hash(password)
