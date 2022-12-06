@@ -4,8 +4,9 @@ from typing import List
 
 from app.core.collections import Auth as AuthCollection
 from app.core.collections import Control, Institution
-from app.core.constants import (ERROR_TO_AUTHENTICATE,
-                                INVALID_USER_PASS_OR_ISPB, TOKEN_EXPIRES_IN)
+from app.core.constants import (ERROR_TO_AUTHENTICATE_MESSAGE,
+                                INVALID_USER_PASS_OR_ISPB_MESSAGE,
+                                TOKEN_EXPIRES_IN)
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.ports.external import DatabasePort, EncryptPort, JwtPort
 from app.ports.usecases import AuthParams, AuthPort, AuthResponse
@@ -34,7 +35,7 @@ class Auth(AuthPort):
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.UNAUTHORIZED,
-                            ERROR_TO_AUTHENTICATE)
+                            ERROR_TO_AUTHENTICATE_MESSAGE)
 
     def _verify_user(self) -> AuthCollection:
         try:
@@ -43,12 +44,12 @@ class Auth(AuthPort):
                 0]
             if not user or not self.encrypt.verify(user.password, self.params.password) or not self._verify_institution(user):
                 raise HttpError(HTTPStatus.UNAUTHORIZED,
-                                INVALID_USER_PASS_OR_ISPB)
+                                INVALID_USER_PASS_OR_ISPB_MESSAGE)
             return user
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.UNAUTHORIZED,
-                            INVALID_USER_PASS_OR_ISPB)
+                            INVALID_USER_PASS_OR_ISPB_MESSAGE)
 
     def _verify_institution(self, user: AuthCollection) -> bool:
         institutions: List[Institution] = self.database.get_by_filters(
@@ -66,4 +67,4 @@ class Auth(AuthPort):
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.UNAUTHORIZED,
-                            ERROR_TO_AUTHENTICATE)
+                            ERROR_TO_AUTHENTICATE_MESSAGE)
