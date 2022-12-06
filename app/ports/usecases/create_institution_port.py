@@ -11,6 +11,8 @@ class CreateInstitutionParams(InputData):
     ispb: str
     document: str
     callback_url: str
+    basic_user: str
+    basic_password: str
 
 
 class CreateInstitutionResponse(InputData):

@@ -1,1 +1,1 @@
-from .passlib import encrypt, verify
+from .passlib import Passlib
