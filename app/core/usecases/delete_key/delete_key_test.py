@@ -1,9 +1,9 @@
 from http import HTTPStatus
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
-from app.tests.helpers import assert_http_error
-from app.tests.helpers.asserts import assert_dict_and_objects
-from app.tests.mocks import DatabaseMock, make_key_object, uuid
+from app.tests.helpers import assert_dict_and_objects, assert_http_error
+from app.tests.mocks import (DatabaseMock, make_key_object, make_token_object,
+                             uuid)
 
 from .delete_key import DeleteKey, DeletetKeyParams
 
@@ -43,6 +43,21 @@ def test_delete_key_should_raise_error_on_error_to_delete():
     assert_http_error(sut._delete_key, HTTPStatus.BAD_REQUEST, uuid())
 
 
+@patch('app.core.usecases.delete_key.delete_key.get_token')
+def test_verify_ispb_should_raise_error_on_invalid_ispb(get_token):
+    get_token.return_value = make_token_object()
+    sut = _make_sut()
+    assert_http_error(sut._verify_ispb, HTTPStatus.FORBIDDEN, uuid())
+
+
+@patch('app.core.usecases.delete_key.delete_key.get_token')
+def test_verify_ispb_should_pass_on_valid_ispb(get_token):
+    token = make_token_object()
+    get_token.return_value = token
+    sut = _make_sut()
+    assert sut._verify_ispb(token.ispb) is None
+
+
 def test_delete_key_should_pass_on_success():
     sut = _make_sut()
     sut.database.delete = MagicMock()
@@ -54,5 +69,6 @@ def test_execute_should_works_correctly():
     key = make_key_object()
     sut._get_key = MagicMock(return_value=key)
     sut._delete_key = MagicMock(return_value=True)
+    sut._verify_ispb = MagicMock(return_value=True)
     result = sut.execute()
     assert result.status_code == HTTPStatus.NO_CONTENT
