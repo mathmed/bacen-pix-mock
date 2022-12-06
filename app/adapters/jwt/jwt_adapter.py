@@ -20,7 +20,7 @@ class JwtAdapter(JwtPort):
             user_id=auth.id
         ).to_dict()
 
-        return jwt.encode(token, key, algorithm='HS256')
+        return str(jwt.encode(token, key, algorithm='HS256'))
 
     def decode_bearer(self, bearer: str, key: str) -> Token:
         def prepare_key(key):
