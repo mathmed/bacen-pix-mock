@@ -2,8 +2,9 @@ from http import HTTPStatus
 from traceback import format_exc
 
 from app.core.collections import Key
-from app.core.constants import ERROR_TO_SAVE
+from app.core.constants import ERROR_TO_SAVE_MESSAGE
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
+from app.core.helpers.token.token import get_token
 from app.ports.external import DatabasePort
 from app.ports.usecases import (CreateKeyParams, CreateKeyPort,
                                 CreateKeyResponse)
@@ -28,7 +29,7 @@ class CreateKey(CreateKeyPort):
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.BAD_REQUEST,
-                            ERROR_TO_SAVE)
+                            ERROR_TO_SAVE_MESSAGE)
 
     def _verify_if_key_exists(self):
 
@@ -39,20 +40,21 @@ class CreateKey(CreateKeyPort):
                             f'Key {self.params.key} already exists')
 
     def _verify_if_ispb_exists(self):
-
+        ispb = get_token().ispb
         institutions = self.database.get_by_filters(
-            'Institution', [{'ispb': self.params.account.ispb}])
+            'Institution', [{'ispb': ispb}])
         if len(institutions) == 0:
             raise HttpError(HTTPStatus.NOT_FOUND,
-                            f'Ispb {self.params.account.ispb} not exists')
+                            f'Ispb {ispb} not exists')
 
     def _validate_params(self) -> Key:
         try:
+            ispb = get_token().ispb
             return Key(
                 account_number=self.params.account.account_number,
                 account_type=self.params.account.account_type,
                 branch=self.params.account.branch,
-                ispb=self.params.account.ispb,
+                ispb=ispb,
                 key_type=self.params.key_type,
                 key_value=self.params.key,
                 owner_document=self.params.owner.document,
