@@ -8,6 +8,7 @@ from .base_collection import BaseCollection
 
 @dataclass
 class Token(BaseCollection):
+    user_id: str
     ispb: str
     exp: int
     iat: int
