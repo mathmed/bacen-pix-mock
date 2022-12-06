@@ -3,9 +3,17 @@ from typing import Dict, List
 from faker import Faker
 
 from app.core.collections import BaseCollection
-from app.ports.external import DatabasePort
+from app.ports.external import DatabasePort, EncryptPort
 
 faker = Faker()
+
+
+class EncryptMock(EncryptPort):
+    def encrypt(self, password: str) -> str:
+        return ''
+
+    def verify(self, encrypted: str, password: str) -> bool:
+        return True
 
 
 class DatabaseMock(DatabasePort):
