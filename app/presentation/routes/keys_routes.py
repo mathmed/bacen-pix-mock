@@ -56,7 +56,8 @@ def create_key(request: Request, response: Response, body: CreateKeyParams):
     },
     tags=TAGS
 )
-def get_key(key: str, response: Response):
+@bearer_auth_middleware
+def get_key(request: Request, response: Response, key: str):
     return fastapi_adapter(response, get_key_factory(GetKeyParams(key=key)))
 
 
@@ -74,5 +75,6 @@ def get_key(key: str, response: Response):
     },
     tags=TAGS
 )
-def delete_key(key: str, response: Response):
+@bearer_auth_middleware
+def delete_key(request: Request, response: Response, key: str):
     return fastapi_adapter(response, delete_key_factory(DeletetKeyParams(key=key)))
