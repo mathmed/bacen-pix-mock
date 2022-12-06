@@ -16,7 +16,7 @@ def word() -> str:
     return faker.word()
 
 
-def integer(min: Optional[int] = None, max: Optional[int] = None) -> int:
+def integer(min: Optional[int] = 0, max: Optional[int] = 9999999999) -> int:
     return faker.random_int(min=min, max=max)
 
 

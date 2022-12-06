@@ -1,3 +1,4 @@
+from .auth_factory import auth_factory
 from .confirm_pix_factory import confirm_pix_factory
 from .create_institution_factory import create_institution_factory
 from .create_key_factory import create_key_factory
