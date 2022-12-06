@@ -2,8 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from app.core.collections import BaseCollection
-
-METHOD_NOT_IMPLEMENTED = 'Method not implemented'
+from app.core.constants import NOT_IMPLEMENTED_ERROR
 
 
 class DatabasePort(ABC):
@@ -14,14 +13,14 @@ class DatabasePort(ABC):
         collection_name: str,
         filters: List[Dict],
     ) -> List[Any]:
-        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+        raise NotImplementedError(NOT_IMPLEMENTED_ERROR)
 
     @abstractmethod
     def save(
         self,
         collection: BaseCollection,
     ) -> str:
-        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+        raise NotImplementedError(NOT_IMPLEMENTED_ERROR)
 
     @abstractmethod
     def delete(
@@ -29,4 +28,4 @@ class DatabasePort(ABC):
         id: str,
         collection: str,
     ):
-        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+        raise NotImplementedError(NOT_IMPLEMENTED_ERROR)

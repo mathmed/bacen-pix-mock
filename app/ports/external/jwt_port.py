@@ -1,16 +1,15 @@
 from abc import ABC, abstractmethod
 
 from app.core.collections import Auth, Token
-
-METHOD_NOT_IMPLEMENTED = 'Method not implemented'
+from app.core.constants import NOT_IMPLEMENTED_ERROR
 
 
 class JwtPort(ABC):
 
     @abstractmethod
     def encode_bearer(self, auth: Auth, ispb: str, key: str) -> str:
-        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+        raise NotImplementedError(NOT_IMPLEMENTED_ERROR)
 
     @abstractmethod
     def decode_bearer(self, bearer: str, key: str) -> Token:
-        raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
+        raise NotImplementedError(NOT_IMPLEMENTED_ERROR)
