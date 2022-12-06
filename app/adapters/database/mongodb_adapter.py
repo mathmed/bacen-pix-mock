@@ -3,7 +3,7 @@
 from os import getenv
 from time import time
 from traceback import format_exc
-from typing import Dict, List
+from typing import Any, Dict, List
 from uuid import uuid4
 
 from pymongo import MongoClient
@@ -39,7 +39,7 @@ class MongoDBAdapter(DatabasePort):
         self,
         collection_name: str,
         filters: List[Dict],
-    ) -> List[BaseCollection]:
+    ) -> List[Any]:
         try:
             query = {}
             for filter in filters:

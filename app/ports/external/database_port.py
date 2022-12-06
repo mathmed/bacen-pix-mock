@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from app.core.collections import BaseCollection
 
@@ -13,7 +13,7 @@ class DatabasePort(ABC):
         self,
         collection_name: str,
         filters: List[Dict],
-    ) -> List[BaseCollection]:
+    ) -> List[Any]:
         raise NotImplementedError(METHOD_NOT_IMPLEMENTED)
 
     @abstractmethod
