@@ -4,6 +4,11 @@ from app.core.helpers.strings import (contains_number, validate_cnpj,
                                       validate_cpf)
 
 
+def validate_amount(amount: int):
+    assert isinstance(amount, int), f'Value of `amount` must be a integer.'
+    assert amount > 0, f'Value of `amount` must be > 0.'
+
+
 def validate_name(name: str):
     assert 0 < len(
         name) < 50, f'Value of `name` must contain between 1 - 50 characters.'

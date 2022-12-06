@@ -1,3 +1,6 @@
+import random
+import string
+from datetime import datetime
 from re import UNICODE, compile, match, sub
 from typing import Dict
 from unicodedata import normalize
@@ -236,3 +239,15 @@ def to_dict_snake_case(dict: Dict) -> Dict:
 
 def contains_number(string: str):
     return any(char.isdigit() for char in string)
+
+
+def generate_end_to_end_id(ispb: str) -> str:
+    datetime_now = datetime.now()
+    random_id = ''.join(random.SystemRandom().choice(
+        string.ascii_letters + string.digits) for _ in range(11))
+    end_to_end_id = 'E{from_ispb}{date_and_hour}{random_id}'.format(
+        from_ispb=ispb,
+        date_and_hour=datetime_now.strftime('%Y%m%d%H%M'),
+        random_id=random_id
+    )
+    return end_to_end_id
