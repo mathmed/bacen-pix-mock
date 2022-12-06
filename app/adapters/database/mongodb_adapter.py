@@ -1,6 +1,7 @@
 
 
 from os import getenv
+from time import time
 from traceback import format_exc
 from typing import Dict, List
 from uuid import uuid4
@@ -48,9 +49,13 @@ class MongoDBAdapter(DatabasePort):
             items = collection_instance.find(query)
 
             from app.core import collections
-            klass = getattr(collections, collection_name)
+            klass: BaseCollection = getattr(collections, collection_name)
 
-            return [BaseCollection.class_from_dict(klass, item) for item in items]
+            def mount_collection(item: Dict):
+                item['id'] = item['_id']
+                return BaseCollection.class_from_dict(klass, item)
+
+            return [mount_collection(item) for item in items]
         except Exception:
             print(format_exc())
             raise EntityNotFound(collection_name)
@@ -64,7 +69,13 @@ class MongoDBAdapter(DatabasePort):
         try:
             collection_instance: Collection = self._get_db()[collection_name]
             data = collection.to_dict()
+            timestamp = int(time())
+
+            del data['id']
+
             data['_id'] = id
+            data['createdAt'] = timestamp
+            data['updatedAt'] = timestamp
             return str(collection_instance.insert_one(data).inserted_id)
         except Exception:
             print(format_exc())
