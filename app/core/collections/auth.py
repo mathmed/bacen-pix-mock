@@ -1,7 +1,7 @@
 
 from dataclasses import dataclass
 
-from app.core.validators.validators import validate_uuid
+from app.core.helpers.validators.validators import validate_uuid
 
 from .base_collection import BaseCollection
 

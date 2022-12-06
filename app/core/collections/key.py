@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 
 from app.core.enums.enums import AccountTypes, KeyTypes
-from app.core.validators import *
+from app.core.helpers.validators import *
 
 from .base_collection import BaseCollection
 

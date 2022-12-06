@@ -1,7 +1,8 @@
 
 from dataclasses import dataclass
 
-from app.core.validators import validate_document, validate_ispb, validate_name
+from app.core.helpers.validators import (validate_document, validate_ispb,
+                                         validate_name)
 
 from .base_collection import BaseCollection
 

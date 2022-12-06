@@ -1,7 +1,7 @@
 
 from dataclasses import dataclass
 
-from app.core.validators import *
+from app.core.helpers.validators import *
 
 from .account import Account
 from .base_collection import BaseCollection
