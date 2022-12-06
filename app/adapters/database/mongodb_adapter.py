@@ -64,7 +64,7 @@ class MongoDBAdapter(DatabasePort):
         self,
         collection: BaseCollection,
     ) -> str:
-        id = str(uuid4())
+        id = collection.id or str(uuid4())
         collection_name = collection.collection()
         try:
             collection_instance: Collection = self._get_db()[collection_name]
