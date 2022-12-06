@@ -19,7 +19,7 @@ class Key(BaseCollection):
     account_type: AccountTypes
     created_at: int = None
     updated_at: int = None
-    id: int = None
+    id: str = None
 
     def __post_init__(self):
         validate_name(self.owner_name)
