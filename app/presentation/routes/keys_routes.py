@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import Response
+from fastapi import Request, Response
 
 from app.adapters.http import fastapi_adapter
 from app.core.helpers.http import HandledError
@@ -11,6 +11,7 @@ from app.ports.usecases.delete_key_port import DeleteKeyPort, DeletetKeyParams
 from app.ports.usecases.get_key_port import GetKeyParams
 from app.presentation.factories import (create_key_factory, delete_key_factory,
                                         get_key_factory)
+from app.presentation.middlewares import bearer_auth_middleware
 
 TAGS = ['Chaves']
 PREFIX = '/keys'
@@ -36,7 +37,8 @@ PREFIX = '/keys'
     },
     tags=TAGS
 )
-def create_key(response: Response, body: CreateKeyParams):
+@bearer_auth_middleware
+def create_key(request: Request, response: Response, body: CreateKeyParams):
     return fastapi_adapter(response, create_key_factory(body))
 
 
