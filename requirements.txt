@@ -3,3 +3,4 @@ uvicorn==0.20.0
 python-dotenv==0.21.0
 PyMongo==4.3.3
 passlib==1.7.4
+PyJWT==2.6.0
