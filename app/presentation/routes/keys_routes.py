@@ -7,8 +7,8 @@ from app.core.helpers.http import HandledError
 from app.main import app
 from app.ports.usecases.create_key_port import (CreateKeyParams,
                                                 CreateKeyResponse)
-from app.ports.usecases.delete_key_port import DeleteKeyPort, DeletetKeyParams
-from app.ports.usecases.get_key_port import GetKeyParams
+from app.ports.usecases.delete_key_port import DeletetKeyParams
+from app.ports.usecases.get_key_port import GetKeyParams, GetKeyResponse
 from app.presentation.factories import (create_key_factory, delete_key_factory,
                                         get_key_factory)
 from app.presentation.middlewares import bearer_auth_middleware
@@ -48,7 +48,7 @@ def create_key(request: Request, response: Response, body: CreateKeyParams):
     summary='Buscar chave PIX',
     responses={
         HTTPStatus.OK.value: {
-            'model': HandledError
+            'model': GetKeyResponse
         },
         HTTPStatus.NOT_FOUND.value: {
             'model': HandledError
@@ -67,6 +67,9 @@ def get_key(request: Request, response: Response, key: str):
     summary='Deletar chave PIX',
     responses={
         HTTPStatus.BAD_REQUEST.value: {
+            'model': HandledError
+        },
+        HTTPStatus.FORBIDDEN.value: {
             'model': HandledError
         },
         HTTPStatus.NOT_FOUND.value: {

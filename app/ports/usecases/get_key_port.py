@@ -7,6 +7,17 @@ from app.core.helpers.http import HttpResponse
 from .usecase import InputData, Usecase
 
 
+class GetKeyResponse(InputData):
+    key_type: str
+    key_value: str
+    owner_document: str
+    owner_name: str
+    ispb: str
+    branch: str
+    account_number: str
+    account_type: str
+
+
 class GetKeyParams(InputData):
     key: str
 

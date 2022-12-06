@@ -4,7 +4,7 @@ from typing import List
 from app.core.collections import Key
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.ports.external import DatabasePort
-from app.ports.usecases import GetKeyParams, GetKeyPort
+from app.ports.usecases import GetKeyParams, GetKeyPort, GetKeyResponse
 
 
 class GetKey(GetKeyPort):
@@ -15,7 +15,7 @@ class GetKey(GetKeyPort):
 
     def execute(self) -> HttpResponse:
         key = self._get_key()
-        return HttpStatus.ok_200(key.to_dict())
+        return HttpStatus.ok_200(GetKeyResponse(**key.to_dict()))
 
     def _get_key(self) -> Key:
         key: List[Key] = self.database.get_by_filters(
