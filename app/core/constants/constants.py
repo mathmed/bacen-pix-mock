@@ -1,6 +1,9 @@
 TOKEN_EXPIRES_IN = 3600
 ISS = 'Pix Mock - BACEN'
-INVALID_USER_PASS_OR_ISPB = 'Invalid user/password/ispb'
-ERROR_TO_AUTHENTICATE = 'Error to authenticate'
-ERROR_TO_SAVE = 'Error to save'
 NOT_IMPLEMENTED_ERROR = 'This contract method must be implemented'
+INVALID_AUTH_METHOD_MESSAGE = 'Invalid auth method'
+INVALID_BEARER_MESSAGE = 'Invalid Bearer Token'
+TOKEN_EXPIRED_MESSAGE = 'Bearer Token expired'
+ERROR_TO_SAVE_MESSAGE = 'Error to save'
+ERROR_TO_AUTHENTICATE_MESSAGE = 'Error to authenticate'
+INVALID_USER_PASS_OR_ISPB_MESSAGE = 'Invalid user/password/ispb'
