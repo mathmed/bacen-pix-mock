@@ -8,7 +8,7 @@ from app.core.helpers.strings import to_dict_camel_case
 def assert_http_error(function, status_code: int, *args):
     with TestCase().assertRaises(HttpError) as e:
         if args:
-            function(args)()
+            function(*args)()
         else:
             function()()
     assert e.exception.status_code == status_code
