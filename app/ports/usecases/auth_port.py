@@ -7,11 +7,19 @@ from app.core.helpers.http import HttpResponse
 from .usecase import InputData, Usecase
 
 
-class GetKeyParams(InputData):
-    key: str
+class AuthResponse(InputData):
+    access_token: str
+    expires_in: int
+    type: str = 'Bearer'
 
 
-class GetKeyPort(Usecase):
+class AuthParams(InputData):
+    user: str
+    password: str
+    ispb: str
+
+
+class AuthPort(Usecase):
     @abstractmethod
     def execute(self) -> HttpResponse:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR)

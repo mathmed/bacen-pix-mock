@@ -1,13 +1,21 @@
 
 from abc import abstractmethod
+from typing import Optional
 
+from app.core.constants import NOT_IMPLEMENTED_ERROR
+# from app.core.collections import Account
 from app.core.helpers.http import HttpResponse
 
-from .usecase import NOT_IMPLEMENTED_ERROR, InputData, Usecase
+from .usecase import InputData, Usecase
 
 
 class SendPixParams(InputData):
-    pass
+    amount: int
+    description: str
+    from_account: str
+    to_account: Optional[str] = None
+    to_key: Optional[str] = None
+    to_key_key: Optional[str] = None
 
 
 class SendPixResponse(InputData):

@@ -1,3 +1,4 @@
+from .auth_port import AuthParams, AuthPort, AuthResponse
 from .confirm_pix import ConfirmPixParams, ConfirmPixPort, ConfirmPixResponse
 from .create_institution_port import (CreateInstitutionParams,
                                       CreateInstitutionPort,
