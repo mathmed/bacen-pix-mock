@@ -5,6 +5,7 @@ import jwt
 
 from app.core.collections import Auth, Token
 from app.core.constants import ISS, TOKEN_EXPIRES_IN
+from app.core.helpers.strings import to_dict_snake_case
 from app.ports.external import JwtPort
 
 
@@ -26,4 +27,6 @@ class JwtAdapter(JwtPort):
         def prepare_key(key):
             return jwt.utils.force_bytes(key)
         jwt.api_jws._jws_global_obj._algorithms['HS256'].prepare_key = prepare_key
-        return jwt.decode(bearer, key, algorithms=['HS256'])
+        dict_token = to_dict_snake_case(
+            jwt.decode(bearer, key, algorithms=['HS256']))
+        return Token(**dict_token)
