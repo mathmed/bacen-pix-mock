@@ -14,7 +14,6 @@ class Owner(InputData):
 
 
 class Account(InputData):
-    ispb: str
     branch: str
     account_number: str
     account_type: AccountTypes
