@@ -1,0 +1,2 @@
+TOKEN_EXPIRES_IN = 3600
+ISS = 'Pix Mock - BACEN'
