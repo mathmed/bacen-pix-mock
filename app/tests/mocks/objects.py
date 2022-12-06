@@ -1,4 +1,4 @@
-from app.core.collections import Institution, Key
+from app.core.collections import Auth, Institution, Key
 from app.core.enums import AccountTypes, KeyTypes
 
 from .values import *
@@ -10,6 +10,13 @@ def make_institution_object() -> Institution:
         callback_url=url(),
         ispb=str(integer(10000000, 99999999)),
         document=cnpj()
+    )
+
+
+def make_auth_object() -> Auth:
+    return Auth(
+        user=uuid(),
+        password=word()
     )
 
 
