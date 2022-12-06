@@ -63,6 +63,12 @@ def test_verify_if_ispb_exists_should_pass_if_ispb_exists():
     assert sut._verify_if_ispb_exists() is None
 
 
+def test_validate_params_should_raise_error_on_invalid_dto_params():
+    sut = _make_sut()
+    sut.params.account.ispb = word()
+    assert_http_error(sut._validate_params, HTTPStatus.UNPROCESSABLE_ENTITY)
+
+
 def test_validate_params_should_return_correct_dto_on_valid_params():
     sut = _make_sut()
     sut._validate_params()
@@ -75,12 +81,6 @@ def test_validate_params_should_return_correct_dto_on_valid_params():
     assert result.owner_name == sut.params.owner.name
     assert result.key_value == sut.params.key
     assert result.key_type == sut.params.key_type
-
-
-def test_validate_params_should_raise_error_on_invalid_dto_params():
-    sut = _make_sut()
-    sut.params.account.ispb = word()
-    assert_http_error(sut._validate_params, HTTPStatus.UNPROCESSABLE_ENTITY)
 
 
 def test_verify_if_key_exists_should_raise_error_if_key_exists():

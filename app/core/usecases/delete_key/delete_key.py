@@ -15,7 +15,7 @@ class DeleteKey(DeleteKeyPort):
 
     def execute(self) -> HttpResponse:
         key = self._get_key()
-        self._delete_key(key._id)
+        self._delete_key(key.id)
         return HttpStatus.no_content_204()
 
     def _get_key(self) -> Key:

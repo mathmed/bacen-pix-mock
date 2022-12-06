@@ -3,7 +3,6 @@ from http import HTTPStatus
 from fastapi import Response
 
 from app.adapters.http import fastapi_adapter
-from app.core.collections import Key
 from app.core.helpers.http import HandledError
 from app.main import app
 from app.ports.usecases.create_key_port import (CreateKeyParams,
@@ -47,7 +46,7 @@ def create_key(response: Response, body: CreateKeyParams):
     summary='Buscar chave PIX',
     responses={
         HTTPStatus.OK.value: {
-            'model': Key
+            'model': HandledError
         },
         HTTPStatus.NOT_FOUND.value: {
             'model': HandledError

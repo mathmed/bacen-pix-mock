@@ -62,7 +62,7 @@ def test_validate_params_should_return_correct_dto_on_valid_params():
     sut = _make_sut()
     sut._validate_params()
     result = sut._validate_params()
-    assert_dict_and_objects(result, sut.params)
+    assert_dict_and_objects(sut.params, result)
 
 
 def test_execute_should_works_correctly():

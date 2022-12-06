@@ -15,9 +15,10 @@ class CreateKey(CreateKeyPort):
         self.database = database
 
     def execute(self) -> HttpResponse:
+        dto = self._validate_params()
         self._verify_if_ispb_exists()
         self._verify_if_key_exists()
-        id = self._save_key(self._validate_params())
+        id = self._save_key(dto)
         return HttpStatus.created_201(CreateKeyResponse(id=id))
 
     def _save_key(self, dto: Key) -> str:
