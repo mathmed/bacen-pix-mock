@@ -2,6 +2,7 @@ from http import HTTPStatus
 from traceback import format_exc
 
 from app.core.collections import Key
+from app.core.constants import ERROR_TO_SAVE
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.ports.external import DatabasePort
 from app.ports.usecases import (CreateKeyParams, CreateKeyPort,
@@ -27,7 +28,7 @@ class CreateKey(CreateKeyPort):
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.BAD_REQUEST,
-                            'Error to save Key.')
+                            ERROR_TO_SAVE)
 
     def _verify_if_key_exists(self):
 

@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import List
 
 from app.core.collections import Key
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
@@ -17,7 +18,7 @@ class GetKey(GetKeyPort):
         return HttpStatus.ok_200(key.to_dict())
 
     def _get_key(self) -> Key:
-        key = self.database.get_by_filters(
+        key: List[Key] = self.database.get_by_filters(
             'Key', [{'keyValue': self.params.key}])
         if len(key) == 0:
             raise HttpError(HTTPStatus.NOT_FOUND,

@@ -4,6 +4,7 @@ from typing import Tuple
 from uuid import uuid4
 
 from app.core.collections import Auth, Institution
+from app.core.constants import ERROR_TO_SAVE
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.ports.external import DatabasePort, EncryptPort
 from app.ports.usecases import (CreateInstitutionParams, CreateInstitutionPort,
@@ -42,7 +43,7 @@ class CreateInstitution(CreateInstitutionPort):
         except Exception:
             print(format_exc())
             raise HttpError(HTTPStatus.BAD_REQUEST,
-                            'Error to save.')
+                            ERROR_TO_SAVE)
 
     def _verify_if_ispb_exists(self):
         institutions = self.database.get_by_filters(
