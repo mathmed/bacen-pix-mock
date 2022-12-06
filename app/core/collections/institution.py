@@ -1,6 +1,5 @@
 
 from dataclasses import dataclass
-from typing import Any
 
 from app.core.validators import validate_document, validate_ispb, validate_name
 
@@ -13,18 +12,11 @@ class Institution(BaseCollection):
     callback_url: str
     document: str
     ispb: str
+    created_at: int = None
+    updated_at: int = None
+    id: str = None
 
-    def __setattr__(self, attribute: str, value: Any):
-
-        if attribute == 'name':
-            validate_name(value)
-
-        if attribute == 'ispb':
-            value = str(value)
-            validate_ispb(value)
-
-        if attribute == 'document':
-            value = str(value)
-            validate_document(value, 'any')
-
-        self.__dict__[attribute] = value
+    def __post_init__(self):
+        validate_name(self.name)
+        validate_document(self.document, 'cnpj')
+        validate_ispb(self.ispb)

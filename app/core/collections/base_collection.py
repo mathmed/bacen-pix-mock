@@ -1,15 +1,13 @@
 
 from dataclasses import fields
-from time import time
 from typing import Any, Dict
 
 from app.core.helpers.strings import to_dict_camel_case, to_dict_snake_case
 
 
 class BaseCollection:
+
     def to_dict(self) -> Dict:
-        self.created_at = int(time())
-        self.updated_at = int(time())
         return to_dict_camel_case(self.__dict__)
 
     def collection(self) -> str:
