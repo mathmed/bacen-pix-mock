@@ -2,7 +2,7 @@ from http import HTTPStatus
 from traceback import format_exc
 
 from app.core.collections import Key
-from app.core.constants import ERROR_TO_SAVE_MESSAGE
+from app.core.helpers.constants import ERROR_TO_SAVE_MESSAGE
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.core.helpers.token.token import get_token
 from app.ports.external import DatabasePort

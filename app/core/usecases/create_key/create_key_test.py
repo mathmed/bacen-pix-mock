@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from unittest.mock import MagicMock, patch
 
-from app.core.enums import AccountTypes, KeyTypes
+from app.core.helpers.enums import AccountTypes, KeyTypes
 from app.ports.usecases.create_key_port import Account, Owner
 from app.tests.helpers import assert_http_error
 from app.tests.mocks import (DatabaseMock, cpf, integer, make_key_object,

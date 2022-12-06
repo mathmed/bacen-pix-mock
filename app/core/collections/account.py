@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from app.core.enums.enums import AccountTypes
+from app.core.helpers.enums.enums import AccountTypes
 from app.core.helpers.validators import (validate_account_number,
                                          validate_branch, validate_document,
                                          validate_ispb, validate_name)

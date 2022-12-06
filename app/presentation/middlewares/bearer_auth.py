@@ -9,11 +9,11 @@ from typing import Dict, Optional
 from app.adapters.database import MongoDBAdapter
 from app.adapters.jwt import JwtAdapter
 from app.core.collections import Auth, Control, Token
-from app.core.constants import (ERROR_TO_AUTHENTICATE_MESSAGE,
-                                INVALID_AUTH_METHOD_MESSAGE,
-                                INVALID_BEARER_MESSAGE,
-                                INVALID_USER_PASS_OR_ISPB_MESSAGE,
-                                TOKEN_EXPIRED_MESSAGE)
+from app.core.helpers.constants import (ERROR_TO_AUTHENTICATE_MESSAGE,
+                                        INVALID_AUTH_METHOD_MESSAGE,
+                                        INVALID_BEARER_MESSAGE,
+                                        INVALID_USER_PASS_OR_ISPB_MESSAGE,
+                                        TOKEN_EXPIRED_MESSAGE)
 from app.core.helpers.http import HttpError
 from app.core.helpers.http.http import HandledError
 from app.core.helpers.token import set_token

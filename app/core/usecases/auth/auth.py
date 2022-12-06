@@ -4,9 +4,9 @@ from typing import List
 
 from app.core.collections import Auth as AuthCollection
 from app.core.collections import Control, Institution
-from app.core.constants import (ERROR_TO_AUTHENTICATE_MESSAGE,
-                                INVALID_USER_PASS_OR_ISPB_MESSAGE,
-                                TOKEN_EXPIRES_IN)
+from app.core.helpers.constants import (ERROR_TO_AUTHENTICATE_MESSAGE,
+                                        INVALID_USER_PASS_OR_ISPB_MESSAGE,
+                                        TOKEN_EXPIRES_IN)
 from app.core.helpers.http import HttpError, HttpResponse, HttpStatus
 from app.ports.external import DatabasePort, EncryptPort, JwtPort
 from app.ports.usecases import AuthParams, AuthPort, AuthResponse

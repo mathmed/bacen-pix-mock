@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from app.core.constants import NOT_IMPLEMENTED_ERROR
+from app.core.helpers.constants import NOT_IMPLEMENTED_ERROR
 
 
 class EncryptPort(ABC):

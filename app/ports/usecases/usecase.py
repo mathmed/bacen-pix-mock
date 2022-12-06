@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 from pydantic import BaseModel
 
-from app.core.constants import NOT_IMPLEMENTED_ERROR
+from app.core.helpers.constants import NOT_IMPLEMENTED_ERROR
 from app.core.helpers.http import HttpResponse
 from app.core.helpers.strings import to_camel_case
 

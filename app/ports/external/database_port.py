@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from app.core.collections import BaseCollection
-from app.core.constants import NOT_IMPLEMENTED_ERROR
+from app.core.helpers.constants import NOT_IMPLEMENTED_ERROR
 
 
 class DatabasePort(ABC):

@@ -1,7 +1,7 @@
 
 from abc import abstractmethod
 
-from app.core.constants import NOT_IMPLEMENTED_ERROR
+from app.core.helpers.constants import NOT_IMPLEMENTED_ERROR
 from app.core.helpers.http import HttpResponse
 
 from .usecase import InputData, Usecase

@@ -4,7 +4,7 @@ from time import time
 import jwt
 
 from app.core.collections import Auth, Token
-from app.core.constants import ISS, TOKEN_EXPIRES_IN
+from app.core.helpers.constants import ISS, TOKEN_EXPIRES_IN
 from app.core.helpers.strings import to_dict_snake_case
 from app.ports.external import JwtPort
 
